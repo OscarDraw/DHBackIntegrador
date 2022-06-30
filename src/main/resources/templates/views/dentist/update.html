@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"  >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <nav th:replace="components/navbar :: nav_bar"></nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3 container-main"></div>
+                <div class="col-9 p-4">
+                    <div class="d-flex align-items-center justify-content-center h-100">
+                        <div class="d-flex flex-column">
+                            <div th:if="${dentist.empty}">
+                                <a th:href="@{/dentist-new}">New dentist</a>
+                            </div>
+                            <div th:unless="${dentist.id}">
+                                <form th:action="@{dentist/update}" th:object="${dentist}" method="post">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="firstName">First name</label>
+                                            <input th:field="*{name}" type="text" class="form-control" id="firstName" placeholder="Name">
+                                            <div class="invalid-feedback">
+                                                Valid first name is required.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="lastName">Last name</label>
+                                            <input th:field="*{surname}" type="text" class="form-control" id="lastName" placeholder="Surname">
+                                            <div class="invalid-feedback">
+                                                Valid last name is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="licence">Licence</label>
+                                        <input th:field="*{licence}" type="text" class="form-control" id="licence" placeholder="123456789">
+                                        <div class="invalid-feedback">
+                                            Valid licence is required.
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to create</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <footer th:replace="components/footer :: footer"></footer>
+</body>
+</html>
